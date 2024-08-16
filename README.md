@@ -1,4 +1,4 @@
-# BookFinder
+# BookShelf
 A react app to find and add books to a wishlist
 
 <img width="1000" alt="Screenshot 2024-08-15 at 9 44 07 PM" src="./ScreenShots/1.png">
