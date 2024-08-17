@@ -60,9 +60,9 @@ const App = () => {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      searchBooks();
-    }
+    if( e.key === "Enter") {searchBooks();}
+      
+    
   };
 
   const toggleTheme = () => {
@@ -85,7 +85,7 @@ const App = () => {
                   placeholder="Search by title, author, or ISBN"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  onSubmit={handleKeyPress}
+                  onKeyDown={handleKeyPress}
                 />
                 <button className="button" onClick={searchBooks}>
                   Search
