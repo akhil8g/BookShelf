@@ -14,23 +14,11 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [loading, setLoading] = useState(false); // State to track loading
 
-  useEffect(() => {
-    const savedWishlist = localStorage.getItem("wishlist");
-    if (savedWishlist) {
-      setWishlist(JSON.parse(savedWishlist));
-    }
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === "dark");
-    }
-  }, []);
+ 
+
+
 
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
-
-  useEffect(() => {
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
     document.body.className = isDarkMode ? "dark-mode" : "light-mode";
   }, [isDarkMode]);
 
