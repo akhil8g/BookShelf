@@ -14,7 +14,7 @@ const MyBooks = ({myBooks, removeFromMyBooks,addToWishlist}) => {
                   <p className="book-info">
                     <strong>{book.title}</strong>
                     <br />
-                    {book.author_name ? book.author_name.join(", ") : "Unknown"}
+                    {book.author_name}
                     <br />
                   </p>
                   <button onClick={() => addToWishlist(book)} class="cta">

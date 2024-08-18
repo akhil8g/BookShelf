@@ -1,21 +1,19 @@
 import React from "react";
 import "./BookList.css"; // Import the CSS file
 
-
-
-const BookList = ({ searchExternalBooks, localSearch, books, addToWishlist,addToMyBooks}) => {
-
+const BookList = ({
+  searchExternalBooks,
+  localSearch,
+  books,
+  addToWishlist,
+  addToMyBooks,
+}) => {
   const handleAddBook = async (book) => {
-    await addToWishlist(book);
-    await addToMyBooks(book);
+    addToWishlist(book);
   };
 
   return (
-
-    
-
-      
-<div className="book-list">
+    <div className="book-list">
       {books.map((book) => (
         <div key={book.key} className="book">
           <div className="back">
@@ -25,13 +23,24 @@ const BookList = ({ searchExternalBooks, localSearch, books, addToWishlist,addTo
               {book.author_name ? book.author_name.join(", ") : "Unknown"}
               <br />
             </p>
-            <button onClick={() => handleAddBook(book)} class="cta">
-              <span>Add to Wishlist</span>
-              <svg width="15px" height="10px" viewBox="0 0 13 10">
-                <path d="M1,5 L11,5"></path>
-                <polyline points="8 1 12 5 8 9"></polyline>
-              </svg>
-            </button>
+
+            {book._id ? (
+              <button onClick={() => handleAddBook(book)} className="cta">
+                <span>Add to Wishlist</span>
+                <svg width="15px" height="10px" viewBox="0 0 13 10">
+                  <path d="M1,5 L11,5"></path>
+                  <polyline points="8 1 12 5 8 9"></polyline>
+                </svg>
+              </button>
+            ) : (
+              <button onClick={() => addToMyBooks(book)} className="cta">
+                <span>Add to Mybooks</span>
+                <svg width="15px" height="10px" viewBox="0 0 13 10">
+                  <path d="M1,5 L11,5"></path>
+                  <polyline points="8 1 12 5 8 9"></polyline>
+                </svg>
+              </button>
+            )}
           </div>
 
           <div className="cover">
@@ -51,7 +60,6 @@ const BookList = ({ searchExternalBooks, localSearch, books, addToWishlist,addTo
         </div>
       ))}
     </div>
-    
   );
 };
 

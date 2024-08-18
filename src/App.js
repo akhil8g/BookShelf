@@ -20,11 +20,11 @@ const App = () => {
     // Fetch initial book list and wishlist data
     const fetchInitialData = async () => {
       try {
-        const booksResponse = await axios.get("/readBooks"); // change route here
-        setMyBooks(booksResponse.data);
+        const booksResponse = await axios.get("http://localhost:4000/api/v1/bookRoutes/readBook"); // change route here
+        setMyBooks(booksResponse.data.data);
 
-        const wishlistResponse = await axios.get("/readWishlist"); // change route here
-        setWishlist(wishlistResponse.data);
+        const wishlistResponse = await axios.get("http://localhost:4000/api/v1/bookRoutes/readWishlist"); // change route here
+        setWishlist(wishlistResponse.data.data);
       } catch (error) {
         console.error("Error fetching initial data", error);
       }
@@ -41,10 +41,11 @@ const App = () => {
     setLoading(true); // Start loading
     try {
       
-      const response = await axios.get("/endpoint/title");// for books with the user
+      const response = await axios.get(`http://localhost:4000/api/v1/bookRoutes/readSpecificBook/${query}`);// for books with the user
 
       
-      setBooks(response.data)
+      setBooks(response.data.data)
+
       
     } catch (error) {
       console.error("Error fetching data from Open Library API", error);
@@ -80,19 +81,17 @@ const App = () => {
       if (!wishlist.find((item) => item.key === book.key)) {
         // Extract the relevant data in the desired format
         const bookData = {
-          title: book.title,
-          author_name: book.author_name ? book.author_name.join(", ") : "Unknown",
-          cover_i: book.cover_i,
+          bookId: book._id
         };
   
         // Send a POST request to your API and get the response
-        const response = await axios.post("/addToWishlist", bookData);
+        const response = await axios.post("http://localhost:4000/api/v1/bookRoutes/addToWishlist", bookData);
         
         // Assuming the response contains the inserted _id
-        const bookWithId = { ...bookData, _id: response.data._id };
+        // const bookWithId = { ...bookData, _id: response.data.data };
   
         // Update the wishlist state with the new book that includes the _id
-        setWishlist([...wishlist, bookWithId]);
+        setWishlist([...wishlist, response.data.data]);
       }
     } catch (error) {
       console.log(error);
@@ -105,17 +104,19 @@ const App = () => {
       if (!myBooks.find((item) => item.key === book.key)) {
         // Extract the relevant data in the desired format
         const bookData = {
+          key: book.key,
           title: book.title,
-          author_name: book.author_name ? book.author_name.join(", ") : "Unknown",
+          author_name: book.author_name,
           cover_i: book.cover_i,
         };
         console.log(bookData)
   
         // Send a POST request to your API and get the response
-        const response = await axios.post("/addToBookList", bookData);
+        const response = await axios.post("http://localhost:4000/api/v1/bookRoutes/createBook", bookData);
         
         // Assuming the response contains the inserted _id
-        const bookWithId = { ...bookData, _id: response.data._id };
+        const bookWithId = { ...bookData, _id: response.data.data };
+        console.log(bookWithId);
   
         // Update the myBooks state with the new book that includes the _id
         setMyBooks([...myBooks, bookWithId]);
@@ -130,7 +131,7 @@ const App = () => {
   const removeFromWishlist = async (book) => {
     try {
       setWishlist(wishlist.filter((item) => item._id !== book._id));
-      await axios.delete(`/deleteWishlist/${book._id}`); // Adjusted delete request to include the _id
+      await axios.delete(`http://localhost:4000/api/v1/bookRoutes/removeWishlist/${book._id}`); // Adjusted delete request to include the _id
     } catch (error) {
       console.log(error);
     }
@@ -138,9 +139,15 @@ const App = () => {
   
   const removeFromMyBooks = async (book) => {
     try {
+      
+      await axios.delete(`http://localhost:4000/api/v1/bookRoutes/deleteBook/${book._id}`); // Adjusted delete request to include the _id
+      console.log(wishlist);
       setWishlist(wishlist.filter((item) => item._id !== book._id));
+      console.log(wishlist);
+
       setMyBooks(myBooks.filter((item) => item._id !== book._id));
-      await axios.delete(`/deleteMyBooks/${book._id}`); // Adjusted delete request to include the _id
+      searchBooks()
+       
     } catch (error) {
       console.log(error);
     }
