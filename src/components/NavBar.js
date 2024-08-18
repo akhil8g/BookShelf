@@ -12,6 +12,9 @@ const NavBar = ({ toggleTheme, isDarkMode }) => {
         <li>
           <Link to="/wishlist">Wishlist</Link>
         </li>
+        <li>
+          <Link to="/myBooks">My Books</Link>
+        </li>
         
       </ul>
       <Toggle toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>

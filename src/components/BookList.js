@@ -1,9 +1,21 @@
 import React from "react";
 import "./BookList.css"; // Import the CSS file
 
-const BookList = ({ books, addToWishlist }) => {
+
+
+const BookList = ({ searchExternalBooks, localSearch, books, addToWishlist,addToMyBooks}) => {
+
+  const handleAddBook = async (book) => {
+    await addToWishlist(book);
+    await addToMyBooks(book);
+  };
+
   return (
-    <div className="book-list">
+
+    
+
+      
+<div className="book-list">
       {books.map((book) => (
         <div key={book.key} className="book">
           <div className="back">
@@ -13,7 +25,7 @@ const BookList = ({ books, addToWishlist }) => {
               {book.author_name ? book.author_name.join(", ") : "Unknown"}
               <br />
             </p>
-            <button onClick={() => addToWishlist(book)} class="cta">
+            <button onClick={() => handleAddBook(book)} class="cta">
               <span>Add to Wishlist</span>
               <svg width="15px" height="10px" viewBox="0 0 13 10">
                 <path d="M1,5 L11,5"></path>
@@ -39,6 +51,7 @@ const BookList = ({ books, addToWishlist }) => {
         </div>
       ))}
     </div>
+    
   );
 };
 
