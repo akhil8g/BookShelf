@@ -3,10 +3,10 @@ import React from "react";
 const WishlistPage = ({ wishlist, removeFromWishlist }) => {
   return (
     <div className="container">
-      <h2>My Wishlist</h2>
+      <h2>Favourites</h2>
       <div className="book-list">
         {wishlist.length === 0 ? (
-          <p>No books in wishlist</p>
+          <p>No books in Favourites</p>
         ) : (
           wishlist.map((book) => (
               <div key={book.key} className="book">

@@ -10,7 +10,7 @@ const NavBar = ({ toggleTheme, isDarkMode }) => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/wishlist">Wishlist</Link>
+          <Link to="/wishlist">Favourites</Link>
         </li>
         <li>
           <Link to="/myBooks">My Books</Link>

@@ -18,7 +18,7 @@ const MyBooks = ({myBooks, removeFromMyBooks,addToWishlist}) => {
                     <br />
                   </p>
                   <button onClick={() => addToWishlist(book)} class="cta">
-              <span>Add to Wishlist</span>
+              <span>Add to Favourites</span>
               <svg width="15px" height="10px" viewBox="0 0 13 10">
                 <path d="M1,5 L11,5"></path>
                 <polyline points="8 1 12 5 8 9"></polyline>

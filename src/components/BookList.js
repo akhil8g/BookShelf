@@ -26,7 +26,7 @@ const BookList = ({
 
             {book._id ? (
               <button onClick={() => handleAddBook(book)} className="cta">
-                <span>Add to Wishlist</span>
+                <span>Add to Favourites</span>
                 <svg width="15px" height="10px" viewBox="0 0 13 10">
                   <path d="M1,5 L11,5"></path>
                   <polyline points="8 1 12 5 8 9"></polyline>
