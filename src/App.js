@@ -20,10 +20,10 @@ const App = () => {
     // Fetch initial book list and wishlist data
     const fetchInitialData = async () => {
       try {
-        const booksResponse = await axios.get("https://book-shelf-backend-seven.vercel.app/api/v1/bookRoutes/readBook"); // change route here
+        const booksResponse = await axios.get("https://book-shelf-server-theta.vercel.app/api/v1/bookRoutes/readBook"); // change route here
         setMyBooks(booksResponse.data.data);
 
-        const wishlistResponse = await axios.get("https://book-shelf-backend-seven.vercel.app/api/v1/bookRoutes/readWishlist"); // change route here
+        const wishlistResponse = await axios.get("https://book-shelf-server-theta.vercel.app/api/v1/bookRoutes/readWishlist"); // change route here
         setWishlist(wishlistResponse.data.data);
       } catch (error) {
         console.error("Error fetching initial data", error);
@@ -41,7 +41,7 @@ const App = () => {
     setLoading(true); // Start loading
     try {
       
-      const response = await axios.get(`https://book-shelf-backend-seven.vercel.app/api/v1/bookRoutes/readSpecificBook/${query}`);// for books with the user
+      const response = await axios.get(`https://book-shelf-server-theta.vercel.app/api/v1/bookRoutes/readSpecificBook/${query}`);// for books with the user
 
       
       setBooks(response.data.data)
@@ -85,7 +85,7 @@ const App = () => {
         };
   
         // Send a POST request to your API and get the response
-        const response = await axios.post("https://book-shelf-backend-seven.vercel.app/api/v1/bookRoutes/addToWishlist", bookData);
+        const response = await axios.post("https://book-shelf-server-theta.vercel.app/api/v1/bookRoutes/addToWishlist", bookData);
         
         // Assuming the response contains the inserted _id
         // const bookWithId = { ...bookData, _id: response.data.data };
@@ -111,7 +111,7 @@ const App = () => {
         };
   
         // Send a POST request to your API and get the response
-        const response = await axios.post("https://book-shelf-backend-seven.vercel.app/api/v1/bookRoutes/createBook", bookData);
+        const response = await axios.post("https://book-shelf-server-theta.vercel.app/api/v1/bookRoutes/createBook", bookData);
         
         // Assuming the response contains the inserted _id
         const bookWithId = { ...bookData, _id: response.data.data };
@@ -129,7 +129,7 @@ const App = () => {
   const removeFromWishlist = async (book) => {
     try {
       setWishlist(wishlist.filter((item) => item._id !== book._id));
-      await axios.delete(`https://book-shelf-backend-seven.vercel.app/api/v1/bookRoutes/removeWishlist/${book._id}`); // Adjusted delete request to include the _id
+      await axios.delete(`https://book-shelf-server-theta.vercel.app/api/v1/bookRoutes/removeWishlist/${book._id}`); // Adjusted delete request to include the _id
     } catch (error) {
       console.log(error);
     }
@@ -138,7 +138,7 @@ const App = () => {
   const removeFromMyBooks = async (book) => {
     try {
       
-      await axios.delete(`https://book-shelf-backend-seven.vercel.app/api/v1/bookRoutes/deleteBook/${book._id}`); // Adjusted delete request to include the _id
+      await axios.delete(`https://book-shelf-server-theta.vercel.app/api/v1/bookRoutes/deleteBook/${book._id}`); // Adjusted delete request to include the _id
       setWishlist(wishlist.filter((item) => item._id !== book._id));
 
       setMyBooks(myBooks.filter((item) => item._id !== book._id));
