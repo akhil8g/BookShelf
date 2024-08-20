@@ -161,7 +161,7 @@ const App = () => {
   };
 
   return (
-    <Router>
+    <Router basename="/BookShelf">
       <NavBar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
       <div className="container">
         <Routes>
